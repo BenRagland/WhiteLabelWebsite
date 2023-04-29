@@ -11,9 +11,12 @@ const Tabs = ({tab,isFilterTab,isActive,handleClick}) => {
     key={tab.name}
     className={`tab-btn ${ isFilterTab ? 'rounded-full glassmorphism':
   'rounded-4'}`}
-    onClick
+    onClick={handleClick}
     >
-      <img src={tab.icon} />
+      <img 
+      className={`tab-btn object-contain ${isFilterTab ?  'w-2/3 h-2/3' : 'w-1 h-1'}`}
+      alt={tab.name}
+      src={tab.icon} />
 
     </div>
   )
