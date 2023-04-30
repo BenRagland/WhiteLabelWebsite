@@ -53,13 +53,12 @@ const customizer = () => {
   };
   // Handle DALLE sumbit
   const handleSubmit = async (type) => {
-    if (!prompt) return alert("Please enter a prompt")
+    if (!prompt) return alert("Please enter a prompt");
 
     try {
-      setGeneratingImg(true)
-      
+      setGeneratingImg(true);
 
-      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+      const response = await fetch("https://white-label-website.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,33 +66,25 @@ const customizer = () => {
         body: JSON.stringify({
           prompt,
         }),
-      })
-     
-      const data = await response.json()
-      .then(data => {
-        console.log(data.photo); 
-      })
-      .catch(error => {
-        console.error(error);
       });
 
-      handleDecals(type, `data:image/png;base64,${data.photo}`)
+      const data = await response.json();
 
-      
+      handleDecals(type, `data:image/png;base64,${data.photo}`);
     } catch (error) {
-      alert(error)
+      alert(error);
     } finally {
-      setGeneratingImg(false)
-      setActiveEditorTab("")
+      setGeneratingImg(false);
+      setActiveEditorTab("");
     }
   };
 
   const handleDecals = (type, result) => {
-    const decalType = DecalTypes[type]
+    const decalType = DecalTypes[type];
 
-    state[decalType.stateProperty] = result
+    state[decalType.stateProperty] = result;
     if (!activeFilterTab[decalType.filterTab]) {
-      handleActiveFilterTab(decalType.filterTab)
+      handleActiveFilterTab(decalType.filterTab);
     }
   };
 
@@ -101,30 +92,30 @@ const customizer = () => {
     switch (tabName) {
       case "logoShirt":
         state.isLogoTexture = !activeFilterTab[tabName];
-        break
+        break;
       case "stylishShirt":
         state.isFullTexture = !activeFilterTab[tabName];
-        break
+        break;
       default:
-        state.isLogoTexture = true
-        state.isFullTexture = false
-        break
+        state.isLogoTexture = true;
+        state.isFullTexture = false;
+        break;
     }
 
     setActiveFilterTab((prevState) => {
       return {
         ...prevState,
         [tabName]: !prevState[tabName],
-      }
-    })
-  }
+      };
+    });
+  };
 
   const readFile = (type) => {
     reader(file).then((result) => {
       handleDecals(type, result);
       setActiveEditorTab("");
-    })
-  }
+    });
+  };
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -154,7 +145,10 @@ const customizer = () => {
           </motion.div>
 
           {/* Creates Back Button */}
-          <motion.div className="absolute z-10 top-5 right-5 " {...fadeAnimation}>
+          <motion.div
+            className="absolute z-10 top-5 right-5 "
+            {...fadeAnimation}
+          >
             <CustomButton
               type="filled"
               title="Go Back"

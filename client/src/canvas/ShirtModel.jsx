@@ -14,9 +14,9 @@ const ShirtModel = () => {
     useFrame((state,delta)=>easing.dampC(materials.lambert1.color, snap.color, 0.25, delta))
 
     const snap = useSnapshot(state)
-    const {nodes,materials} = useGLTF('/public/shirt_baked.glb')
-    // const {nodes,materials} = useGLTF('/public/MalePuffer/JacketMyExport.glb')
-    //console.log(useGLTF('/public/MalePuffer/JacketMyExport.glb'))
+    const {nodes,materials} = useGLTF('/shirt_baked.glb')
+    // const {nodes,materials} = useGLTF('/MalePuffer/JacketMyExport.glb')
+    //console.log(useGLTF('/MalePuffer/JacketMyExport.glb'))
 
     //const logoTextureThree = logoTexture.texture
     const logoTexture = useTexture(snap.logoDecal)
