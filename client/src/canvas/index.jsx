@@ -14,9 +14,7 @@ const CanvasModel = () => {
     gl={{preserveDrawingBuffer:true}}
     >
       <ambientLight intensity={0.6}/>
-      <Environment 
-      preset="city"
-      />
+      {/* <Environment preset="city"/> */}
 
       <CameraRig>
         <Backdrop />
